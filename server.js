@@ -17,7 +17,7 @@ app.use(bp.json({ type: 'application/vnd.api+json' }));
 
 //Routing
 var PORT = 3000;
-require('./app/routing/api-routes.js')(app); 
+// require('./app/routing/api-routes.js')(app); 
 require('./app/routing/html-routes.js')(app);
 
 //Listener
