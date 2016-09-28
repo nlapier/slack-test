@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<!-- Meta tag for bootstrap scaling --><meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- jQuery --><script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+		<!-- Bootstrap JS --> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- Bootstrap CSS --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<title>Slack Test</title>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<form>
+
+				<div class="form-group">
+					<label for="exampleInputEmail1">Input text here</label>
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
+			
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+
+		<script type="text/javascript">
+
+			/*
+				bootcampspot2 #general webhook: https://hooks.slack.com/services/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
+
+				curl -X POST --data-urlencode 'payload={"channel": "#general", "username": "webhookbot", "text": "This is posted to #general and comes from a bot named webhookbot.", "icon_emoji": ":ghost:"}' https://hooks.slack.com/services/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
+				*/
+			
+			$(".btn-default").on("click", function(event){ 
+				let text = $("textarea").val();
+				const queryURL = "https://hooks.slack.com/services/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";
+				let slackBody = JSON.stringify({
+					'channel': '#general', 
+					'username': 'webhookbot', 
+					'text': text, 
+					'icon_emoji': ':ghost:'
+					});
+
+				console.log("slackBody: ", typeof slackBody);
+
+			    $.ajax({
+			        url: queryURL,
+			        type: 'POST',
+			        data: slackBody
+			    }).done(function(response){
+
+			        console.log("response: " + response);
+         
+			    })
+
+			    $("textarea").val("");
+
+				return false;
+			});
+
+		
+
+		</script>
+	</body>
+</html>
